@@ -52,9 +52,10 @@ body {
     display: flex;
     align-items: center;
     padding: 10px 0;
+    gap: 15px;
 }
 
-.logo img {
+.nav-logo {
     height: 100%;
     width: auto;
     object-fit: contain;
@@ -252,8 +253,10 @@ body {
 /* Services Section */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .service-card {
@@ -527,6 +530,14 @@ footer p {
 
     .business-name {
         font-size: 1.2rem;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav-logo {
+        height: 40px;
     }
 }
 
