@@ -103,7 +103,7 @@ function handleFormSubmit(event) {
     console.log('Sending form data:', Object.fromEntries(formData));
 
     // Use the new deployment URL
-    const scriptURL = 'https://script.google.com/macros/s/AKfycby7IqH-slEaPbgLHhHy3YznOMmCDff2bG5Hq0u5A6sy96-jfoInueq0z9o8Z1C8EqwloQ/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyPeuMgeU3WClA4yWFjrAHZdv-Fu4aAEE7wf4KHP4QjdVNlRAO6qXWelP_TxyobHpZOBQ/exec';
 
     // Send the form data
     fetch(scriptURL, {
@@ -118,11 +118,11 @@ function handleFormSubmit(event) {
         console.log('Response received:', response);
         // Clear the form and show success message
         form.reset();
-        status.innerHTML = '<div style="color: green;">Thank you! Your message has been sent. (Debug: Check sitecraftly@gmail.com)</div>';
+        status.innerHTML = '<div style="color: green;">Thank you! Your message has been sent.</div>';
     })
     .catch(error => {
         console.error('Error:', error);
-        status.innerHTML = '<div style="color: red;">Oops! There was a problem sending your message. Please try again or email sitecraftly@gmail.com directly. Error: ' + error.message + '</div>';
+        status.innerHTML = '<div style="color: red;">Oops! There was a problem sending your message. Please try again or email ultrapropertyservicesinc@gmail.com directly. Error: ' + error.message + '</div>';
     })
     .finally(() => {
         // Re-enable the submit button
