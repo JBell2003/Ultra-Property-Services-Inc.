@@ -128,7 +128,7 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form class="contact-us-form">
+                    <form id="contactForm" class="contact-us-form" onsubmit="handleFormSubmit(event)">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" id="name" name="name" placeholder="Your Name" required>
@@ -155,6 +155,7 @@
                             <textarea id="message" name="message" placeholder="Your Message" rows="4" required></textarea>
                         </div>
                         <button type="submit" class="submit-button">Send Message</button>
+                        <div id="formStatus" style="margin-top: 15px; text-align: center;"></div>
                     </form>
                 </div>
             </div>

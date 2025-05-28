@@ -77,4 +77,55 @@ sections.forEach(section => {
     section.style.transform = 'translateY(20px)';
     section.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
     observer.observe(section);
-}); 
+});
+
+function handleFormSubmit(event) {
+    event.preventDefault();  // Prevent form from submitting normally
+    
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+    const submitButton = form.querySelector('button[type="submit"]');
+    
+    // Show loading state
+    submitButton.disabled = true;
+    submitButton.innerHTML = 'Sending...';
+    status.innerHTML = '<div style="color: blue;">Sending your message...</div>';
+
+    // Collect form data
+    const formData = {
+        name: form.querySelector('#name').value,
+        email: form.querySelector('#email').value,
+        phone: form.querySelector('#phone').value,
+        service: form.querySelector('#service').value,
+        message: form.querySelector('#message').value
+    };
+
+    // Use your latest deployment URL here
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxVFCXMknQPxk2iZA_iDlNukm60gTj8xs9SZ-I2VnYsO4U-Mw_ejgWZmQkrJuMKaK59KQ/exec';
+
+    // Send the form data
+    fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        // Clear the form and show success message
+        form.reset();
+        status.innerHTML = '<div style="color: green;">Thank you! Your message has been sent.</div>';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        status.innerHTML = '<div style="color: red;">Oops! There was a problem sending your message. Please try again.</div>';
+    })
+    .finally(() => {
+        // Re-enable the submit button
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Send Message';
+    });
+} 
