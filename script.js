@@ -91,31 +91,38 @@ function handleFormSubmit(event) {
     submitButton.innerHTML = 'Sending...';
     status.innerHTML = '<div style="color: blue;">Sending your message...</div>';
 
-    // Create a new form data object
-    const formData = new FormData();
+    // Create URL-encoded form data
+    const formData = new URLSearchParams();
     formData.append('name', form.querySelector('#name').value);
     formData.append('email', form.querySelector('#email').value);
     formData.append('phone', form.querySelector('#phone').value);
     formData.append('service', form.querySelector('#service').value);
     formData.append('message', form.querySelector('#message').value);
 
-    // Use your latest deployment URL here
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzqlJQcTmHGCDDL0Ai-DHt7qcHm93qM-QbTy685grRw3o_ybK31YBIEge8XwdIVctSaFQ/exec';
+    // Log the data being sent
+    console.log('Sending form data:', Object.fromEntries(formData));
+
+    // Use the new deployment URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycby7IqH-slEaPbgLHhHy3YznOMmCDff2bG5Hq0u5A6sy96-jfoInueq0z9o8Z1C8EqwloQ/exec';
 
     // Send the form data
     fetch(scriptURL, {
         method: 'POST',
         mode: 'no-cors',
-        body: formData
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData.toString()
     })
-    .then(() => {
+    .then(response => {
+        console.log('Response received:', response);
         // Clear the form and show success message
         form.reset();
-        status.innerHTML = '<div style="color: green;">Thank you! Your message has been sent.</div>';
+        status.innerHTML = '<div style="color: green;">Thank you! Your message has been sent. (Debug: Check sitecraftly@gmail.com)</div>';
     })
     .catch(error => {
         console.error('Error:', error);
-        status.innerHTML = '<div style="color: red;">Oops! There was a problem sending your message. Please try again or email us directly at ultrapropertyservicesinc@gmail.com</div>';
+        status.innerHTML = '<div style="color: red;">Oops! There was a problem sending your message. Please try again or email sitecraftly@gmail.com directly. Error: ' + error.message + '</div>';
     })
     .finally(() => {
         // Re-enable the submit button
