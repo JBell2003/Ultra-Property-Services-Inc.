@@ -36,7 +36,7 @@ body {
     background-color: rgba(255, 255, 255, 0.95);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     z-index: 1000;
-    height: 90px;
+    height: 100px;  /* Increased from 90px */
 }
 
 #navbar .container {
@@ -44,11 +44,12 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 20px;
+    height: 100%;
 }
 
 /* Logo Styling */
 .logo {
-    height: 70px;
+    height: 90px;  /* Increased from 70px (approximately 1.3x) */
     display: flex;
     align-items: center;
     padding: 10px 0;
@@ -109,7 +110,7 @@ body {
 
 /* Hero Section */
 .hero {
-    margin-top: 70px;
+    margin-top: 100px;  /* Match navbar height */
     padding: 60px 0 40px;
     position: relative;
     color: var(--text-color);
@@ -483,11 +484,11 @@ footer p {
     }
 
     .logo {
-        height: 50px;  /* Further reduced size for mobile */
+        height: 60px;  /* Adjusted for mobile */
     }
 
     .hero {
-        margin-top: 60px;  /* Match navbar height */
+        margin-top: 80px;  /* Match mobile navbar height */
         padding: 40px 0 30px;  /* Reduced padding on mobile */
         min-height: 40vh;  /* Even shorter on mobile */
     }
@@ -509,7 +510,7 @@ footer p {
     }
 
     #navbar {
-        height: 70px;  /* Adjusted mobile height */
+        height: 80px;  /* Adjusted for mobile */
     }
 
     .contact-grid {
@@ -537,7 +538,7 @@ footer p {
     }
     
     .nav-logo {
-        height: 40px;
+        height: 100%;
     }
 }
 
