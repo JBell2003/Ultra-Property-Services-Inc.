@@ -89,7 +89,7 @@ function handleFormSubmit(event) {
     // Show loading state
     submitButton.disabled = true;
     submitButton.innerHTML = 'Sending...';
-    status.innerHTML = '<div style="color: blue;">Sending your message...</div>';
+    status.innerHTML = '<div style="color: blue;">Testing form submission...</div>';
 
     // Create URL-encoded form data
     const formData = new URLSearchParams();
@@ -99,8 +99,10 @@ function handleFormSubmit(event) {
     formData.append('service', form.querySelector('#service').value);
     formData.append('message', form.querySelector('#message').value);
 
-    // Log the data being sent
-    console.log('Sending form data:', Object.fromEntries(formData));
+    // Log test data
+    console.log('TEST - Form data that would be sent:', Object.fromEntries(formData));
+    console.log('TEST - Would be sent to URL:', 'https://script.google.com/macros/s/AKfycbyvfqNthqhMT4mtBBOnWPAub3ZNgpPeud5QM8MKQs6q_a5z4AD1oov5CR-Na7pxZCUbsQ/exec');
+    console.log('TEST - Would be sent to email: ultrapropertyservicesinc@gmail.com');
 
     // Use the new deployment URL
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyvfqNthqhMT4mtBBOnWPAub3ZNgpPeud5QM8MKQs6q_a5z4AD1oov5CR-Na7pxZCUbsQ/exec';
@@ -115,14 +117,14 @@ function handleFormSubmit(event) {
         body: formData.toString()
     })
     .then(response => {
-        console.log('Response received:', response);
-        // Clear the form and show success message
+        console.log('TEST - Response received:', response);
+        // Clear the form and show test message
         form.reset();
-        status.innerHTML = '<div style="color: green;">Thank you! Your message has been sent.</div>';
+        status.innerHTML = '<div style="color: green;">Test successful! Form is working correctly.</div>';
     })
     .catch(error => {
         console.error('Error:', error);
-        status.innerHTML = '<div style="color: red;">Oops! There was a problem sending your message. Please try again or email ultrapropertyservicesinc@gmail.com directly. Error: ' + error.message + '</div>';
+        status.innerHTML = '<div style="color: red;">Test failed. Error: ' + error.message + '</div>';
     })
     .finally(() => {
         // Re-enable the submit button
