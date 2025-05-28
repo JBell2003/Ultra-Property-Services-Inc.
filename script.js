@@ -80,7 +80,7 @@ sections.forEach(section => {
 });
 
 function handleFormSubmit(event) {
-    event.preventDefault();  // Prevent form from submitting normally
+    event.preventDefault();
     
     const form = document.getElementById('contactForm');
     const status = document.getElementById('formStatus');
@@ -91,14 +91,13 @@ function handleFormSubmit(event) {
     submitButton.innerHTML = 'Sending...';
     status.innerHTML = '<div style="color: blue;">Sending your message...</div>';
 
-    // Collect form data
-    const formData = {
-        name: form.querySelector('#name').value,
-        email: form.querySelector('#email').value,
-        phone: form.querySelector('#phone').value,
-        service: form.querySelector('#service').value,
-        message: form.querySelector('#message').value
-    };
+    // Create a new form data object
+    const formData = new FormData();
+    formData.append('name', form.querySelector('#name').value);
+    formData.append('email', form.querySelector('#email').value);
+    formData.append('phone', form.querySelector('#phone').value);
+    formData.append('service', form.querySelector('#service').value);
+    formData.append('message', form.querySelector('#message').value);
 
     // Use your latest deployment URL here
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzqlJQcTmHGCDDL0Ai-DHt7qcHm93qM-QbTy685grRw3o_ybK31YBIEge8XwdIVctSaFQ/exec';
@@ -106,29 +105,17 @@ function handleFormSubmit(event) {
     // Send the form data
     fetch(scriptURL, {
         method: 'POST',
-        mode: 'cors',
-        body: JSON.stringify(formData),
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        mode: 'no-cors',
+        body: formData
     })
-    .then(response => {
-        if (!response.ok) {
-            return response.text().then(text => {
-                throw new Error('Server response: ' + text);
-            });
-        }
-        return response.json();
-    })
-    .then(data => {
+    .then(() => {
         // Clear the form and show success message
         form.reset();
         status.innerHTML = '<div style="color: green;">Thank you! Your message has been sent.</div>';
-        console.log('Success:', data);
     })
     .catch(error => {
         console.error('Error:', error);
-        status.innerHTML = '<div style="color: red;">Oops! There was a problem sending your message. Please try again. Error: ' + error.message + '</div>';
+        status.innerHTML = '<div style="color: red;">Oops! There was a problem sending your message. Please try again or email us directly at ultrapropertyservicesinc@gmail.com</div>';
     })
     .finally(() => {
         // Re-enable the submit button
