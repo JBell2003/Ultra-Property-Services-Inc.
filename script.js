@@ -103,7 +103,7 @@ function handleFormSubmit(event) {
     console.log('Sending form data:', Object.fromEntries(formData));
 
     // Use the new deployment URL
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyPeuMgeU3WClA4yWFjrAHZdv-Fu4aAEE7wf4KHP4QjdVNlRAO6qXWelP_TxyobHpZOBQ/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyvfqNthqhMT4mtBBOnWPAub3ZNgpPeud5QM8MKQs6q_a5z4AD1oov5CR-Na7pxZCUbsQ/exec';
 
     // Send the form data
     fetch(scriptURL, {
