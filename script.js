@@ -101,11 +101,12 @@ function handleFormSubmit(event) {
     };
 
     // Use your latest deployment URL here
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxVFCXMknQPxk2iZA_iDlNukm60gTj8xs9SZ-I2VnYsO4U-Mw_ejgWZmQkrJuMKaK59KQ/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzqlJQcTmHGCDDL0Ai-DHt7qcHm93qM-QbTy685grRw3o_ybK31YBIEge8XwdIVctSaFQ/exec';
 
     // Send the form data
     fetch(scriptURL, {
         method: 'POST',
+        mode: 'cors',
         body: JSON.stringify(formData),
         headers: {
             'Content-Type': 'application/json'
@@ -113,15 +114,21 @@ function handleFormSubmit(event) {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            return response.text().then(text => {
+                throw new Error('Server response: ' + text);
+            });
         }
+        return response.json();
+    })
+    .then(data => {
         // Clear the form and show success message
         form.reset();
         status.innerHTML = '<div style="color: green;">Thank you! Your message has been sent.</div>';
+        console.log('Success:', data);
     })
     .catch(error => {
         console.error('Error:', error);
-        status.innerHTML = '<div style="color: red;">Oops! There was a problem sending your message. Please try again.</div>';
+        status.innerHTML = '<div style="color: red;">Oops! There was a problem sending your message. Please try again. Error: ' + error.message + '</div>';
     })
     .finally(() => {
         // Re-enable the submit button
