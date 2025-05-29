@@ -1,0 +1,9 @@
+# www.ultrapropertyservices.net robots.txt file
+User-agent: *
+Allow: /
+Disallow: /private/
+Disallow: /temp/
+Disallow: /admin/
+
+# Sitemap location
+Sitemap: https://ultrapropertyservices.net/sitemap.xml 
